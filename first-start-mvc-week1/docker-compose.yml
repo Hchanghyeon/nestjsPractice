@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  mvc_start_db:
+    container_name: mvc-start
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mvc_start
+    image: postgres:13.1-alpine
+    ports:
+      - "5433:5432"
+    volumes:
+      - mvc_start_db:/var/lib/postgresql/data
+    restart: unless-stopped
+volumes:
+  mvc_start_db:
