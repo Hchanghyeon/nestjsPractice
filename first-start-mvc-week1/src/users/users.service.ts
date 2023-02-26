@@ -19,6 +19,6 @@ export class UsersService {
     }
 
     async findUser(id:String):Promise<User | FindUserErrors>{
-        return
+        return await this.prisma.user.findUnique({where:{id:Number(id)}});
     }
 }

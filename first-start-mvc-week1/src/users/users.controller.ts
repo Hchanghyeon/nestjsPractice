@@ -16,6 +16,6 @@ export class UsersController {
 
     @Get("/find/:id")
     async findUser(@Param('id') id:String):Promise<User | FindUserErrors>{
-        return
+        return await this.userService.findUser(id);
     }
 }
