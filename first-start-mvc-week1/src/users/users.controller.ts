@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Param } from '@nestjs/common';
 import { createUserDTO } from './dto/create-user';
-import { CreateUserErrors } from './group/create-user-errors';
-import { FindUserErrors } from './group/find-user-errors';
+import { CreateUserErrors } from './error/create-user-errors';
+import { FindUserErrors } from './error/find-user-errors';
 import { UsersService } from './users.service';
 import { User } from '@prisma/client';
 

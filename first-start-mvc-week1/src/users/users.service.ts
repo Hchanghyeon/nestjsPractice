@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { createUserDTO } from './dto/create-user';
-import { CreateUserErrors } from './group/create-user-errors';
-import { FindUserErrors } from './group/find-user-errors';
+import { CreateUserErrors } from './error/create-user-errors';
+import { FindUserErrors } from './error/find-user-errors';
 import { User } from '@prisma/client';
 
 @Injectable()
@@ -19,6 +19,7 @@ export class UsersService {
     }
 
     async findUser(id:String):Promise<User | FindUserErrors>{
-        return await this.prisma.user.findUnique({where:{id:Number(id)}});
+        let result: User | FindUserErrors = await this.prisma.user.findUnique({where:{id:Number(id)}});
+        return result ? result : result = FindUserErrors.NotFound;
     }
 }
