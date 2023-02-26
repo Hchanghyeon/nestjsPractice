@@ -10,12 +10,20 @@ export class UsersService {
     constructor(private prisma:PrismaService){}
 
     async createUser(user:createUserDTO):Promise<User | CreateUserErrors>{
-        return await this.prisma.user.create({
-            data:{
-                name:user.name,
-                email:user.email
+        let result : User | CreateUserErrors;
+        try {
+             result = await this.prisma.user.create({
+                data:{
+                    name:user.name,
+                    email:user.email
+                }
+            });
+        } catch(e){
+            if(e.meta.target[0] === 'email'){
+                result = CreateUserErrors.AlreadyEmailExist;
             }
-        });
+        }
+        return result;
     }
 
     async findUser(id:String):Promise<User | FindUserErrors>{
